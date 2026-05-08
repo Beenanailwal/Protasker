@@ -23,5 +23,5 @@ git clone
 npm install
 npm run dev
 
-👩‍💻 Author
+👩‍💻 Author  -
 Beena Nailwal
