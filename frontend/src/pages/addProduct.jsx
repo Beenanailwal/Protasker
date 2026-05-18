@@ -17,12 +17,24 @@ export default function AddProduct() {
 
   // 👉 EDIT MODE: data load
   useEffect(() => {
-    if (id) {
-      API.get(`/products/${id}`).then(res => {
-        setForm(res.data)
+  if (id) {
+    API.get(`/products/${id}`).then(res => {
+      setForm({
+        name: res.data.name || "",
+        category: res.data.category || "",
+        price: res.data.price || "",
+        stock: res.data.stock || ""
       })
-    }
-  }, [id])
+    })
+  } else {
+    setForm({
+      name: "",
+      category: "",
+      price: "",
+      stock: ""
+    })
+  }
+}, [id])
 
   const handleChange = (e) => {
     setForm({

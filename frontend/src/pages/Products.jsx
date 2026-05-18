@@ -93,9 +93,9 @@ const handleDelete = async (id) => {
     {/* PRODUCTS */}
     <div className="flex-1">
 
-      <h1 className="text-xl md:text-2xl font-semibold mb-4">
+      {/* <h1 className="text-xl md:text-2xl font-semibold mb-4">
         Products
-      </h1>
+      </h1> */}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 

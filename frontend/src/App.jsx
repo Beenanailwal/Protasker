@@ -94,12 +94,12 @@ function App() {
 
 <Route
   path="/add-product"
-  element={<AddProduct />}
+  element={<AddProduct key="add" />}
 />
 
 <Route
   path="/edit-product/:id"
-  element={<AddProduct />} // 👈 same page reuse
+  element={<AddProduct key="edit" />} // 👈 same page reuse
 />
 
             <Route
