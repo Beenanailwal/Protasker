@@ -339,7 +339,96 @@ export default function Tasks() {
     </button>
 
   </div>
+{showAdd && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl w-[90%] max-w-md">
+      <h2 className="text-lg font-bold mb-4">Add Task</h2>
 
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+        className="w-full border p-2 rounded mb-3"
+      />
+
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Description"
+        className="w-full border p-2 rounded mb-3"
+      />
+
+      <div className="flex justify-end gap-2">
+        <button onClick={() => setShowAdd(false)} className="px-4 py-2 border rounded">
+          Cancel
+        </button>
+        <button onClick={handleAdd} className="px-4 py-2 bg-blue-600 text-white rounded">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+{showEdit && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl w-[90%] max-w-md">
+      <h2 className="text-lg font-bold mb-4">Edit Task</h2>
+
+      <input
+        value={editTitle}
+        onChange={(e) => setEditTitle(e.target.value)}
+        className="w-full border p-2 rounded mb-3"
+      />
+
+      <textarea
+        value={editDesc}
+        onChange={(e) => setEditDesc(e.target.value)}
+        className="w-full border p-2 rounded mb-3"
+      />
+
+      <select
+        value={editStatus}
+        onChange={(e) => setEditStatus(e.target.value)}
+        className="w-full border p-2 rounded mb-3"
+      >
+        <option value="pending">Pending</option>
+        <option value="in-progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+
+      <div className="flex justify-end gap-2">
+        <button onClick={() => setShowEdit(false)} className="px-4 py-2 border rounded">
+          Cancel
+        </button>
+        <button onClick={handleUpdate} className="px-4 py-2 bg-green-600 text-white rounded">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+{showDelete && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl w-[90%] max-w-sm">
+      <h2 className="text-lg font-bold mb-4">Delete Task?</h2>
+
+      <p className="text-gray-500 mb-4">
+        Are you sure you want to delete this task?
+      </p>
+
+      <div className="flex justify-end gap-2">
+        <button onClick={() => setShowDelete(false)} className="px-4 py-2 border rounded">
+          Cancel
+        </button>
+        <button onClick={confirmDelete} className="px-4 py-2 bg-red-600 text-white rounded">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+)}
   <ToastContainer />
 </div>
   )

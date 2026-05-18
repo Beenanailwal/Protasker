@@ -11,6 +11,9 @@ export default function Products() {
   const saved = localStorage.getItem("cart")
   return saved ? JSON.parse(saved) : []
 })
+const [showDelete, setShowDelete] = useState(false)
+const [deleteId, setDeleteId] = useState(null)
+
   const navigate = useNavigate()
   const isAdmin = localStorage.getItem("role") === "admin"
 
@@ -40,13 +43,15 @@ export default function Products() {
       return [...prev, { product, quantity: 1 }]
     })
   }
-const handleDelete = async (id) => {
-  const ok = confirm("Delete this product?")
-  if (!ok) return
+const handleDelete = (id) => {
+  setDeleteId(id)
+  setShowDelete(true)
+}
 
-  await deleteProduct(id)
-
-  setProducts(prev => prev.filter(p => p._id !== id))
+const confirmDelete = async () => {
+  await deleteProduct(deleteId)
+  setProducts(prev => prev.filter(p => p._id !== deleteId))
+  setShowDelete(false)
 }
 
   const increase = (item) => {
@@ -237,6 +242,33 @@ const handleDelete = async (id) => {
     </div>
 
   </div>
+  {showDelete && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl w-[90%] max-w-sm">
+      <h2 className="text-lg font-bold mb-4">Delete Product?</h2>
+
+      <p className="text-gray-500 mb-4">
+        Are you sure you want to delete this product?
+      </p>
+
+      <div className="flex justify-end gap-2">
+        <button
+          onClick={() => setShowDelete(false)}
+          className="px-4 py-2 border rounded"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={confirmDelete}
+          className="px-4 py-2 bg-red-600 text-white rounded"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 </div>
   )
 }
